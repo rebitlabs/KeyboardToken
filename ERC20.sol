@@ -159,42 +159,6 @@ contract ERC20 is IERC20 {
         emit Transfer(sender, recipient, amount);
     }
 
-    /** @dev Creates `amount` tokens and assigns them to `account`, increasing
-     * the total supply.
-     *
-     * Emits a {Transfer} event with `from` set to the zero address.
-     *
-     * Requirements
-     *
-     * - `to` cannot be the zero address.
-     */
-    function _mint(address account, uint256 amount) internal {
-        require(account != address(0), "ERC20: mint to the zero address");
-
-        _totalSupply = _totalSupply.add(amount);
-        _balances[account] = _balances[account].add(amount);
-        emit Transfer(address(0), account, amount);
-    }
-
-     /**
-     * @dev Destroys `amount` tokens from `account`, reducing the
-     * total supply.
-     *
-     * Emits a {Transfer} event with `to` set to the zero address.
-     *
-     * Requirements
-     *
-     * - `account` cannot be the zero address.
-     * - `account` must have at least `amount` tokens.
-     */
-    function _burn(address account, uint256 value) internal {
-        require(account != address(0), "ERC20: burn from the zero address");
-
-        _totalSupply = _totalSupply.sub(value);
-        _balances[account] = _balances[account].sub(value);
-        emit Transfer(account, address(0), value);
-    }
-
     /**
      * @dev Sets `amount` as the allowance of `spender` over the `owner`s tokens.
      *
@@ -216,14 +180,4 @@ contract ERC20 is IERC20 {
         emit Approval(owner, spender, value);
     }
 
-    /**
-     * @dev Destoys `amount` tokens from `account`.`amount` is then deducted
-     * from the caller's allowance.
-     *
-     * See {_burn} and {_approve}.
-     */
-    function _burnFrom(address account, uint256 amount) internal {
-        _burn(account, amount);
-        _approve(account, msg.sender, _allowances[account][msg.sender].sub(amount));
-    }
 }
