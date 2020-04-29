@@ -1,2 +1,2 @@
 # KeyboardToken
-Rebit Wallet Keyboard Token
+Rebit AI Keyboard Token
